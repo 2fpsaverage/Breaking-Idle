@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
             prestigeButton.SetActive(true);
         }
 
-        InvokeRepeating("Cook", 0, 1.0f);
+        //InvokeRepeating("Cook", 0, 1.0f);
         InvokeRepeating("Save", 0, 30.0f);
     }
 
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         if(meth < 1000000)
         {
-            methText.text = ("Meth: " + meth);
+            methText.text = ("Meth: " + Mathf.Round(meth));
         }
         else
         {
@@ -85,10 +85,14 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
     }
 
+    void FixedUpdate()
+    {
+        Cook();
+    }
+
     private void Cook()
     {
-        meth = meth + methIncrease;
-        meth = Mathf.Round(meth);
+        meth = meth + methIncrease/60;
     }
 
     private void Save()
