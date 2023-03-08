@@ -23,10 +23,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
     private int prestiges = 0;
     public int prestigeCost = 100000;
     private bool winState = false;
+    public AudioSource audioSource;
 
     void Start()
     {
         DataPersistenceManager.instance.LoadGame();
+        audioSource = GetComponent<AudioSource>();
 
         if (PlayerPrefs.GetInt("showPrestige") == 1)
         {
@@ -94,12 +96,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         meth = meth + methIncrease/60;
     }
-
+    //Saves Data
     private void Save()
     {
         DataPersistenceManager.instance.SaveGame();
     }
-
+    //Loads Data
     public void LoadData(SaveData data)
     {
         this.meth = data.meth;
